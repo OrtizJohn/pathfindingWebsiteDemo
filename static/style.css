@@ -1,0 +1,61 @@
+head {
+  font-family: "Times New Roman", sans-serif;
+}
+body {
+    font-family: "Times New Roman", sans-serif;
+    background: linear-gradient(to bottom, rgb(212, 0, 255), rgb(0, 234, 255));
+}
+/*used for displaying drop down menu and nav bar*/
+/* .selectionBox {
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+  } */
+
+  .algorithm-options {
+    float: right;
+    margin-right: 10px;
+  }
+
+  .algorithm-option {
+    display: none;
+  }
+
+  .algorithm-option.active {
+    display: block;
+  }
+
+
+/*Used for displaying grid cells */
+.grid {
+    display: grid;
+    /*grid-template-columns: repeat(10, 40px); /* Adjust the number of columns and cell size as needed */
+    /*grid-template-rows: repeat(10, 40px); /* Adjust the number of rows and cell size as needed */
+    gap: 1px;
+    border: 1px solid #000;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.cell.start {
+    background-color: rgb(65, 252, 8);
+}
+.cell.neighbor {
+  background-color: rgb(252, 203, 8) ;
+}
+
+.cell.target {
+    background-color: red;
+}
+.cell.path {
+    background-color: aqua;
+}
+
+.cell.obstacle {
+    background-color: black;
+}

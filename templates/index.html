@@ -1,0 +1,49 @@
+ 
+<!doctype html>
+<!--
+ Originally used in google cloud walkthrough for using python on runtime linked here : https://cloud.google.com/appengine/docs/standard/python3/building-app/writing-web-service
+ This work is only intended as learning tool and would not be used for anything outside the scope of showcasing different algorithms. 
+-->
+
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Path Finding Visuallization </title>
+  <script src="{{ url_for('static', filename='script.js') }}" type="module"></script>
+  
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <h1>Path Finding Examples</h1>
+  <div class="selectionBox", id="selectedAlgorithm">
+    <h2>Selected Algorithm:</h2>
+    <select name="algorithm" id="algorithm">
+      {% for header in algorithmHeaders %}
+        <option value="{{ header }}">{{ header }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  
+
+  <!-- Add a button to trigger the algorithm -->
+  <div style="display: flex; align-items: center; margin-top: 20px;">
+    <button id="generateGrid"> Generate New Grid</button>
+    <button id="runAlgorithm" style="margin-left: 20px;">Run Algorithm</button>
+    <div class="sliderContainer" style="margin-left: 20px;">
+      <label for="delaySlider">Delay (ms):</label>
+      <input type="range" min="0" max="50" value="25" class="slider" id="delaySlider" />
+      <span id="delayValue">25</span>
+    </div>
+ </div>
+  
+  <div id="gridImage" style="background-image: url('/static/imgs/path.jpg'); height: 1250px; background-size: cover;"></div>
+  <div class="grid" id="grid" style="margin-top: 150px;"></div>
+
+  
+
+</body>
+</html>
