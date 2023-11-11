@@ -1,4 +1,4 @@
-import node from "/static/Node.js";
+import node from "/static/node.js";
 import delay from "/static/utils.js";
 
 /* https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2

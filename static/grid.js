@@ -1,4 +1,4 @@
-import node from "/static/Node.js";
+import node from "/static/node.js";
 
 export default class grid {
     constructor(n, m){
