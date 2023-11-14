@@ -7,8 +7,8 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-algorithmHeaders = ("Dijkstra's","A* Algorithm", "BFS", "DFS" , "Dijkstra's (Priority Queue)")
-
+algorithmHeaders = ("Dijkstra's","A* Algorithm", "BFS", "DFS")
+#algorithmInformation = ("Dj info", "A* information","BFS info","DFS info")
 
 def print_grid(grid):
   for row in grid:

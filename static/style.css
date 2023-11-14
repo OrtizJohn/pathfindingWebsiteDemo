@@ -12,6 +12,13 @@ body {
     text-align: center;
   } */
 
+  .NavBar{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #d4a3ff; 
+    border: 2px solid #000;
+  }
   .algorithm-options {
     float: right;
     margin-right: 10px;
@@ -58,4 +65,35 @@ body {
 
 .cell.obstacle {
     background-color: black;
+}
+
+/*Popup code from chatGPT css*/
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.popup-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.popup-content {
+  font-size: 20px;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }

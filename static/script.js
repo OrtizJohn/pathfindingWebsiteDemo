@@ -64,10 +64,36 @@ class Controller {
   }
 }
 
+function showPopup(header, content) {
+  const popupContainer = document.querySelector('.popup-container');
+  const popupHeader = document.querySelector('.popup-header');
+  const popupContent = document.querySelector('.popup-content');
+
+  popupHeader.textContent = header;
+  popupContent.textContent = content;
+
+  popupContainer.style.display = 'block';
+}
+let algorithmInformation = ["Dj info", "A* information","BFS info","DFS info"];
+
 document.addEventListener('DOMContentLoaded', function() {
   
   const grid1 = document.getElementById('grid');
   let controller = new Controller();
+
+
+  //////////////////////////////////////////////////////////////////////////
+  //add event listner for popUp
+  const popupContainer = document.querySelector('.popup-container');
+  const popupClose = document.querySelector('.popup-close');
+
+  // Close the popup when the close button is clicked
+  popupClose.addEventListener('click', function () {
+    popupContainer.style.display = 'none';
+  });
+
+  showPopup("Welcome!!","This webservice is built to demostrate some of the most common algorithms for pathfinding. There is a navigation bar that offers a selection of common pathfinding algorithms, generates a grid to run the algorithms, a button to run them, and delay for speeding up/slowing down the time it takes for algorithm to run. All algorithms will be tested on a grid of n(rows) and m(columns), even if the algorithm is intented for graphs(will be explained in more detail when the algorithm is ran. In order for the webservice to work correctly first one needs to generate a fresh grid throught the generate grid button, then select which algorithm wanted to demonstrate through the dropdown menu. Finally select the rate the algorithm should run on a delay and then click the run button to see algorithm in action.")
+  ////////////////////////////////////////////////////////////////////
 
   //add even listener for slider
   const delaySlider = document.getElementById('delaySlider');
@@ -81,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('runAlgorithm').addEventListener('click', function() {
     const algorithm = document.getElementById('algorithm').value;
     controller.callAlgorithm(algorithm,grid1);
+    //TODO: Add message window describing each alogrithm
   });
 
   //Add event listner to generate grid
@@ -123,6 +150,20 @@ document.addEventListener('DOMContentLoaded', function() {
     /* grid1.style.gridTemplateColumns = `repeat(${newGrid.m}, 30px)`;
     grid1.style.gridTemplateRows = `repeat(${newGrid.n}, 30px)`; */
     console.log("Generated new Grid")
+    const algorithm = document.getElementById('algorithm').value;
+    /* if(algorithm == "Dijkstra's"){
+      showPopup("Dijkstra's Info:", algorithmInformation[0]);
+    }
+    else if(algorithm == "A* Algorithm"){
+      showPopup("A* Information", algorithmInformation[1]);
+    }
+    else if(algorithm == "BFS"){
+      showPopup("BFS Information", algorithmInformation[2]);
+    }
+    else if(algorithm == "DFS"){
+      showPopup("DFS Information", algorithmInformation[3]);
+    } */
+    
   });
 
 });
