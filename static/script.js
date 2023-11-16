@@ -64,7 +64,7 @@ class Controller {
   }
 }
 
-function showPopup(header, content) {
+function showPopup(header, content, listItem1,listItem2,listItem3,listItem4) {
   const popupContainer = document.querySelector('.popup-container');
   const popupHeader = document.querySelector('.popup-header');
   const popupContent = document.querySelector('.popup-content');
@@ -72,9 +72,52 @@ function showPopup(header, content) {
   popupHeader.textContent = header;
   popupContent.textContent = content;
 
+  //setListInstructions
+  document.getElementById("ins1").textContent = listItem1;
+  document.getElementById("ins2").textContent = listItem2;
+  document.getElementById("ins3").textContent = listItem3;
+  document.getElementById("ins4").textContent = listItem4;
+
   popupContainer.style.display = 'block';
 }
-let algorithmInformation = ["Dj info", "A* information","BFS info","DFS info"];
+function updateAlgoDescription(){
+  // Get the selected value from the dropdown
+  const selectedAlgorithm = document.getElementById('algorithm').value;
+
+  // Update the algorithm name and description in the DescriptionBar based on the selected value
+  const algoNameDB = document.getElementById('algoNameDB');
+  const algoDescrDB = document.getElementById('algoDescrDB');
+  const timeComplexity = document.getElementById('timeComplexity');
+  const spaceComplexity = document.getElementById('spaceComplexity');
+
+  // Example logic: Update the algorithm name and description based on the selected value
+  if (selectedAlgorithm === 'Dijkstra\'s') {
+    algoNameDB.textContent = 'Dijkstra\'s Algorithm (using priority queue)';
+    algoDescrDB.textContent = 'This algorithm with a priority queue utilizes node weights to represent edge weights between cells, randomly generated between 0 and 1 in this scenario, showcasing algorithmic principles rather than practical application. Unlike BFS, it commences exploration from neighbors with the lowest weights, aiming to find the shortest path by prioritizing nodes with the smallest accumulated distance. The algorithm iteratively explores neighboring nodes, updating their distances based on the current minimum distance, ultimately determining the shortest path from a source node to all other nodes in the graph by maintaining a priority queue.';
+    timeComplexity.textContent = 'O(V + E log V), where V represents the number of nodes/cells in the graph (rows x columns), E is the number of edges which in this case will be porportional to number of nodes ';
+    spaceComplexity.textContent = 'O(V), where V (rows x columns) in the worst case based on priority queue data structure';
+  } else if (selectedAlgorithm === 'A* Algorithm') {
+    algoNameDB.textContent = 'A* Algorithm';
+    algoDescrDB.textContent = 'This heuristic-based algorithm utilizes node weights to represent edge costs between cells, typically as actual distances or estimations, aiding in efficient pathfinding. Unlike DFS nor BFS, it employs a heuristic function (often the sum of actual cost from the start to the currentNode and estimated remaining cost to the goal) guiding the search towards the goal node, balancing cost and exploration. The algorithm evaluates nodes with the lowest combined actual and heuristic cost, gradually determining the shortest path from a source node to a target by leveraging a priority queues or similar data structures.';
+    timeComplexity.textContent = 'O((V + E) log V), note that A* outperforms dijkstra\'s in most case when the hueristic is well informed, however in worst case scenarios it can expand nodes in a similar time scale as Dijkstra\'s';
+    spaceComplexity.textContent = 'O(V), where V is the number of nodes/cells in the graph (rows x columns) in the worst-case scenario, relying on data structures such as priority queues.';
+
+  }
+  else if (selectedAlgorithm === 'BFS') {
+    algoNameDB.textContent = 'Breadth First Search Algorithm';
+    algoDescrDB.textContent = 'BFS systematically explores nodes in levels, starting from the source node and traversing adjacent nodes before progressing to deeper levels. Unlike A*, it does not utilize edge weights but instead focuses on breadth-first exploration to find the shortest path. The algorithm gradually explores neighboring nodes, marking visited nodes and recording their distance from the source, finally determining the shortest path from the source node to all other nodes in the graph.';
+    timeComplexity.textContent = 'O(V + E), where V represents the number of nodes/cells in the graph (rows x columns), and E is the number of edges, similar to dfs. Differs in only how they traverse as bfs explores nodes level by level, in worst case yield similar results.';
+    spaceComplexity.textContent = 'O(V), where V is the number of nodes/cells in the graph (rows x columns), employing data structures like queues for breadth-first exploration.';
+
+  }
+  else if (selectedAlgorithm === 'DFS') {
+    algoNameDB.textContent = 'Depth First Search Algorithm';
+    algoDescrDB.textContent = 'DFS explores as far as possible along each branch before backtracking, employing a stack-like structure or recursion. Similar to BFS, it doesn\'t consider edge weights. Unlike both A* and BFS, it focuses on depth-first exploration, potentially reaching nodes deeper in the graph. The algorithm iteratively explores adjacent unvisited nodes, gradually determining paths from a source node, usually prioritizing depth-first traversal over finding the shortest path.';
+    timeComplexity.textContent = 'O(V + E), where V represents the number of nodes/cells in the graph (rows x columns), and E is the number of edges. It differs in only how they traverse as dfs explores as deeply as possible along each branch but in worst case yield similar results..';
+    spaceComplexity.textContent = 'O(V), where V is the number of nodes/cells in the graph (rows x columns), relying on recursion or a stack-like structure for depth-first exploration.';
+
+  }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   
@@ -92,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
     popupContainer.style.display = 'none';
   });
 
-  showPopup("Welcome!!","This webservice is built to demostrate some of the most common algorithms for pathfinding. There is a navigation bar that offers a selection of common pathfinding algorithms, generates a grid to run the algorithms, a button to run them, and delay for speeding up/slowing down the time it takes for algorithm to run. All algorithms will be tested on a grid of n(rows) and m(columns), even if the algorithm is intented for graphs(will be explained in more detail when the algorithm is ran. In order for the webservice to work correctly first one needs to generate a fresh grid throught the generate grid button, then select which algorithm wanted to demonstrate through the dropdown menu. Finally select the rate the algorithm should run on a delay and then click the run button to see algorithm in action.")
+  showPopup("Welcome!!","This website is built to demostrate some of the most common algorithms for pathfinding. There is a navigation bar that offers a selection of common pathfinding algorithms, generates a grid to run the algorithms, a button to run them, and delay for speeding up/slowing down the time it takes for algorithm to run. All algorithms will be tested on a grid of 50(rows) and 80(columns) in cells. Neighbors will be considered as all adjacent cell/nodes including diagonals, hence for a single node there should be 8 neigbors unless a cell/node is a wall (which act as obstacles as is common in most pathfinding problems). To run the website as intended follow these steps:","1- Generate a fresh grid (with generate grid button)","2- Select which algorithm wanted to demonstrate (with the dropdown menu)","3- Select the rate the algorithm should run (with the delay slider)", "4- Click the run button to see the algorithm in action (Pop will go way when run button clicked or by pressing x)")
   ////////////////////////////////////////////////////////////////////
 
   //add even listener for slider
@@ -107,6 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('runAlgorithm').addEventListener('click', function() {
     const algorithm = document.getElementById('algorithm').value;
     controller.callAlgorithm(algorithm,grid1);
+    // remove welcome popUp to algo run
+    if(popupContainer.style.display != 'none'){
+      popupContainer.style.display = 'none';
+    }
+    
     //TODO: Add message window describing each alogrithm
   });
 
@@ -115,6 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
     //hide img
     if(document.getElementById('gridImage')){
       document.getElementById('gridImage').remove();
+    }
+    //reveal information
+    if(document.getElementById('DescriptionBar').style.display != 'flex'){
+      document.getElementById('DescriptionBar').style.display= 'flex';
     }
     
     
@@ -126,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if(controller.uniqueGrid != null){
         controller.uniqueGrid= null;
     }
-    controller.createGrid(50,85);
+    controller.createGrid(50,80);
     //let newGrid = controller.getGrid();
     //newGrid.updateHTMLGrid(grid1);
     let newGrid = controller.getGrid();
@@ -146,25 +198,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     grid1.style.gridTemplateColumns = `repeat(${newGrid.m}, 30px)`;
     grid1.style.gridTemplateRows = `repeat(${newGrid.n}, 30px)`;
-    // Set up grid layout
-    /* grid1.style.gridTemplateColumns = `repeat(${newGrid.m}, 30px)`;
-    grid1.style.gridTemplateRows = `repeat(${newGrid.n}, 30px)`; */
+   
     console.log("Generated new Grid")
-    const algorithm = document.getElementById('algorithm').value;
-    /* if(algorithm == "Dijkstra's"){
-      showPopup("Dijkstra's Info:", algorithmInformation[0]);
-    }
-    else if(algorithm == "A* Algorithm"){
-      showPopup("A* Information", algorithmInformation[1]);
-    }
-    else if(algorithm == "BFS"){
-      showPopup("BFS Information", algorithmInformation[2]);
-    }
-    else if(algorithm == "DFS"){
-      showPopup("DFS Information", algorithmInformation[3]);
-    } */
+    
+  
     
   });
+
+
+  //add event listener on algorithm change 
+  document.getElementById('algorithm').addEventListener('change',function () {
+    updateAlgoDescription();
+  });
+  document.getElementById('algorithm').addEventListener('change', updateAlgoDescription());
+
 
 });
 

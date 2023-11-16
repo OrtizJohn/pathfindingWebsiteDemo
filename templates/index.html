@@ -35,19 +35,40 @@
     </div>
 
  </div>
+
+ <div class="DescriptionBar" id="DescriptionBar">
+  <h2 id="algoNameDB">Algorithm Name</h2>
+  <p class="algorithmDescription"id="algoDescrDB">Algorithm Description</p>
+  <div class="complexitySection">
+    <!-- <h3>Complexity</h3> -->
+    <p> Time Complexity: <span class="timeComplexity" id="timeComplexity">O(n)</span> </p>
+    <p>Space Complexity: <span class="spaceComplexity"id="spaceComplexity">O(1)</span></p>
+  </div>
+</div>
+
+
+
   <!-- Popup container -->
   <div class="popup-container">
     <span class="popup-close">&times;</span>
     <div class="popup-header"></div>
     <div class="popup-content"></div>
+    <div class="popup-itemList">
+      <ul>
+        <li id="ins1"></li>
+        <li id="ins2"></li>
+        <li id="ins3"></li>
+        <li id="ins4"></li>
+      </ul>
+    </div>
   </div>
 
 
   <!--Welcome Image -->
-  <div id="gridImage" style="background-image: url('/static/imgs/path.jpg'); height: 1250px; background-size: cover;"></div>
+  <div id="gridImage" style="background-image: url('/static/imgs/path.jpg'); height: 1250px; background-size: cover; margin-top: 5px;"></div>
 
   <!--After generating grid -->
-  <div class="grid" id="grid" style="margin-top: 100px;"></div>
+  <div class="grid" id="grid" style="margin-top: 5px;"></div>
 
   
 

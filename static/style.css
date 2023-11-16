@@ -67,12 +67,12 @@ body {
     background-color: black;
 }
 
-/*Popup code from chatGPT css*/
+/*Popup code from chatGPT css generation*/
 .popup-container {
   display: none;
   position: fixed;
-  top: 10%;
-  left: 55%;
+  top: 45%;
+  left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
   background-color: #fff;
@@ -90,10 +90,65 @@ body {
 .popup-content {
   font-size: 20px;
 }
+.popup-itemList {
+  font-size: 15px;
+}
 
 .popup-close {
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.DescriptionBar{
+  display: none; 
+  align-items: flex-start; 
+  flex-direction: column; 
+  margin-top: 5px;
+  background-color: #d4a3ff; 
+  border: 2px solid rgb(0, 0, 0);
+}
+
+/*Description Bar inner CSS code generated from chatGPT 3.5: 
+/* Style for Algorithm Name */
+.DescriptionBar h2 {
+  position: relative;
+  left: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style for Algorithm Description */
+.DescriptionBar .algorithmDescription {
+  position: relative;
+  left: 15px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Style for Complexity Section */
+.DescriptionBar .complexitySection {
+  position: relative;
+  left: 15px;
+  border-top: 1px solid #ccc;
+  padding-top: 1px;
+  margin-top: 1px;
+}
+
+/* Style for Time and Space Complexity Text */
+.DescriptionBar .complexitySection p {
+  position: relative;
+  left: 17px;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Style for Time and Space Complexity Values */
+.DescriptionBar .complexitySection .timeComplexity,
+.DescriptionBar .complexitySection .spaceComplexity {
+
+  font-weight: bold;
+  /*color: #00d9ff;  Change color as desired */
 }
