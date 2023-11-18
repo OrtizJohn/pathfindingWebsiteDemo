@@ -46,6 +46,11 @@ export default async function aStar(grid,delayValue){
 		prevNode = currentNode;
 		currentNode = currentResults.minNode;
 		let currentIdx = currentResults.minIndex;
+
+		let tempNodeType = currentNode.nodeType;
+        currentNode.nodeType = "current";
+        grid.updateCurrentCell(currentNode);
+
 		console.log("____________________");
 		console.log(passCt," -Current Node: ",currentNode.id, currentIdx);
 
@@ -68,10 +73,13 @@ export default async function aStar(grid,delayValue){
 		
 			return finalPath;
 		}
+		
+
 
 		//step4 check all children
 		let neighborsAdjustment = [[0, -1], [0, 1], [-1, 0], [1, 0], [-1, -1], [-1, 1], [1, -1], [1, 1]];
 		let neighbors = [];
+		let neighborsCSS =[];
 		for (let i = 0; i < neighborsAdjustment.length; i++) {
 			let posAdj = neighborsAdjustment[i];
 			var neighborPosX = Number(currentNode.getCoord()[0]) + Number(posAdj[0]);
@@ -93,8 +101,10 @@ export default async function aStar(grid,delayValue){
 
 			let newNeighborNode;
 			if(  neighborNode.nodeType !== "start" && neighborNode.nodeType !== "target" && neighborNode.nodeType !== "obstacle") {
+				
 				neighborNode.nodeType= "neighbor";
 				newNeighborNode = new node(neighborNode.id, "neighbor");
+						
 			}
 			else{
 				newNeighborNode = new node(neighborNode.id, neighborNode.nodeType);
@@ -104,12 +114,15 @@ export default async function aStar(grid,delayValue){
 			
 			newNeighborNode.parent = currentNode;//set parent as current node
 			
-
+			
 			neighbors.push(newNeighborNode);
 		}
-
+		//update currentNode type to closed 
+        await delay(150 +delayValue);
+        grid.updateCurrentNodeColorAstar(tempNodeType,currentNode);
 		//call to refresh html
 		grid.updatePortionGrid(neighbors);
+		//grid.updatePortionGrid(neighborsCSS);
         await delay(delayValue);
 
 		//step 5 loop through neighbors 
@@ -144,7 +157,9 @@ export default async function aStar(grid,delayValue){
 		}
 	
 		}
+
 		
+
 		passCt= passCt +1;
 	}
 

@@ -47,6 +47,7 @@ body {
     height: 100%;
     background-color: white;
     border: 1px solid #ddd;
+    font-size: 0.6em;
 }
 
 .cell.start {
@@ -62,6 +63,13 @@ body {
 .cell.path {
     background-color: aqua;
 }
+.cell.current {
+  background-color: aquamarine;
+}
+.cell.closed {
+  background-color: rgb(249, 119, 6);
+}
+
 
 .cell.obstacle {
     background-color: black;

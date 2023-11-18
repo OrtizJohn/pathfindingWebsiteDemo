@@ -2,7 +2,7 @@
 import delay from "/static/utils.js";
 /*DFS PSUEDO
 Assumption: As dfs is meant for nodes the grid displayed will act as graph as each cell/node will have a path to another if that cell/node is adjacent and is not a wall/obstacle
-1-create to lists one
+1-create two lists one
     openList (stack ) will be used to cycle through all nodes
     closedList(set) will be used to mark which nodes have been visited
 2-Add start node to openList 
@@ -28,6 +28,10 @@ export default async function dfs(grid, delayValue){
 
     while(openList.length > 0){
         let currentNode = openList.pop(); // Change from shift() to pop() for DFS
+
+        let tempNodeType = currentNode.nodeType;
+        currentNode.nodeType = "current";
+        grid.updateCurrentCell(currentNode);
         //console.log("____________________");
         //console.log(" -Current Node: ",currentNode.id);
 
@@ -91,6 +95,11 @@ export default async function dfs(grid, delayValue){
             }
             
         }
+
+        //update currentNode type to closed 
+        await delay(150 +delayValue);
+        grid.updateCurrentNodeColor(tempNodeType,currentNode);
+       
 
         //call to refresh html
         //grid.updateHTMLGrid(); 

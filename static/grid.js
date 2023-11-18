@@ -30,7 +30,7 @@ export default class grid {
         const start_row = Math.floor(Math.random() * 4); // Random integer between 0 and 3 (inclusive)
         const start_col = Math.floor(Math.random() * m); // Random integer between 0 and n-1 (inclusive)
 
-        const end_row = Math.floor(Math.random() * 3) + n - 3; // Random integer between n-3 and n-1 (inclusive)
+        const end_row = Math.floor(Math.random() * 7) + n - 7; // Random integer between n-3 and n-1 (inclusive)
         const end_col = Math.floor(Math.random() * m); // Random integer between 0 and n-1 (inclusive)
         
         console.log(start_row,start_col,end_row,end_col)
@@ -64,11 +64,21 @@ export default class grid {
     getNode(r, c) {
         return this.nodes[r][c];
     }
+    updateCurrentCell(updateNode){
+        const cell = document.getElementById(updateNode.id);
+        cell.className = 'cell ' +updateNode.nodeType;
+    }
     updatePortionGrid(updateNodes){
         updateNodes.forEach(updateNode => {
             const cell = document.getElementById(updateNode.id);
             cell.className = 'cell ' +updateNode.nodeType;
         });
+    }
+    updateInnerHtmlCell(updateNodes){
+        updateNodes.forEach(updateNode => {
+            const cell = document.getElementById(updateNode.id);
+            cell.innerText = updateNode.distFromSrc.toFixed(2);
+        })
     }
     updateHTMLGrid(){
         for (let r = 0; r < this.n; r++) {
@@ -100,5 +110,28 @@ export default class grid {
         gridHTML.style.gridTemplateRows = `repeat(${this.n}, 30px)`; */
         
     }
-    
+    updateCurrentNodeColor(tempNodeType,currentNode){
+        if (tempNodeType === "start") {
+            currentNode.nodeType = "start";
+            this.updateCurrentCell(currentNode);
+        }
+        else if(currentNode.nodeType === "current"){
+            currentNode.nodeType = "closed";
+            this.updateCurrentCell(currentNode);
+        }
+        else{
+            //currentNode.nodeType = tempNodeType;
+            this.updateCurrentCell(currentNode);
+        }
+    }
+    updateCurrentNodeColorAstar(tempNodeType,currentNode){
+        if (tempNodeType === "start") {
+            currentNode.nodeType = "start";
+            this.updateCurrentCell(currentNode);
+        }
+        else if(currentNode.nodeType === "current"){
+            currentNode.nodeType = "neighbor";
+            this.updateCurrentCell(currentNode);
+        }
+    }
 }

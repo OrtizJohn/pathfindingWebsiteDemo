@@ -19,9 +19,14 @@ export default async function dijkstra(grid, delayValue) {
     grid.startNode.weight =0;
 
     openList.enqueue(grid.startNode);
-
+    let ct =0;
     while ( !openList.isEmpty() ) {
+        //set currentNode
         let currentNode = openList.dequeue();
+
+        let tempNodeType = currentNode.nodeType;
+        currentNode.nodeType = "current";
+        grid.updateCurrentCell(currentNode);
 
         if (currentNode === undefined) {
             throw Error("Open list must be empty as current node is being returned: undefined");
@@ -51,32 +56,37 @@ export default async function dijkstra(grid, delayValue) {
 
             let neighborNode = grid.nodes[neighborPosX][neighborPosY];
 
-            if (neighborNode.nodeType == "obstacle") {
+            if (neighborNode.nodeType === "obstacle") {
                 continue;
             }
-
-            if (neighborNode.nodeType != "start" && neighborNode.nodeType != "target" && neighborNode.nodeType != "obstacle") {
-                neighborNode.nodeType = "neighbor";
-
-                //update distances
-                neighborNode.distFromSrc = currentNode.distFromSrc + neighborNode.weight;
-
-            }
-            
-
             if (!closedList.has(neighborNode)) {
                 neighborNode.parent = currentNode;
-                //closedList.add(currentNode);
+        
+                if (neighborNode.nodeType !== "start"  && neighborNode.nodeType !== "obstacle") {
+                    //&& neighborNode.nodeType !== "target"
+                    if(neighborNode.nodeType !== "target"){
+                        neighborNode.nodeType = "neighbor";
+                    }
+                    neighborNode.distFromSrc = currentNode.distFromSrc + neighborNode.weight;
+                }
 
-                closedList.add(neighborNode);
                 openList.enqueue(neighborNode);
                 neighbors_CSS.push(neighborNode);
+                closedList.add(neighborNode);
+
             }
         }
 
+        //update currentNode type to closed 
+        await delay(150 +delayValue);
+        grid.updateCurrentNodeColor(tempNodeType,currentNode);
+     
+        
         //grid.updateHTMLGrid();
         grid.updatePortionGrid(neighbors_CSS);
+        grid.updateInnerHtmlCell(neighbors_CSS);
         await delay(delayValue); // Introduce a delay
+       
     }
 
     return finalPath;

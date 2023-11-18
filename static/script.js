@@ -30,6 +30,14 @@ class Controller {
   
 
   async callAlgorithm(algo, gridHtml){
+
+       // Disable generateGrid button 
+      const generateGridButton = document.getElementById('generateGrid');
+      const runAlgorithmButton = document.getElementById('runAlgorithm');
+      generateGridButton.disabled = true;
+      runAlgorithmButton.disabled = true;
+
+
       this.algorithm = algo;
       const delaySlider = document.getElementById('delaySlider');
       const delayValue = parseInt(delaySlider.value);
@@ -59,6 +67,10 @@ class Controller {
           console.log("Made it back should change color now");
           this.updateGridFinalPath(finalPath,gridHtml);
         }
+
+        // Enable generateGrid button
+        generateGridButton.disabled = false;
+        runAlgorithmButton.disabled = false;
       }
       
   }
@@ -135,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     popupContainer.style.display = 'none';
   });
 
-  showPopup("Welcome!!","This website is built to demostrate some of the most common algorithms for pathfinding. There is a navigation bar that offers a selection of common pathfinding algorithms, generates a grid to run the algorithms, a button to run them, and delay for speeding up/slowing down the time it takes for algorithm to run. All algorithms will be tested on a grid of 50(rows) and 80(columns) in cells. Neighbors will be considered as all adjacent cell/nodes including diagonals, hence for a single node there should be 8 neigbors unless a cell/node is a wall (which act as obstacles as is common in most pathfinding problems). To run the website as intended follow these steps:","1- Generate a fresh grid (with generate grid button)","2- Select which algorithm wanted to demonstrate (with the dropdown menu)","3- Select the rate the algorithm should run (with the delay slider)", "4- Click the run button to see the algorithm in action (Pop will go way when run button clicked or by pressing x)")
+  showPopup("Welcome!!","This website is built to demostrate some of the most common algorithms for pathfinding. There is a navigation bar that offers a selection of common pathfinding algorithms, generates a grid to run the algorithms, a button to run them, and delay for speeding up/slowing down the time it takes for algorithm to run. All algorithms will be tested on a grid of 50(rows) and 80(columns) in cells. Neighbors will be considered as all adjacent cell/nodes including diagonals, hence for a single node there should be 8 neigbors unless a cell/node is a wall (which act as obstacles as is common in most pathfinding problems). To run the website as intended follow these steps:","1- Generate a fresh grid (with generate grid button)","2- Select which algorithm wanted to demonstrate (with the dropdown menu)","3- Select the rate the algorithm should run (with the delay slider)", "4- Click the run button to see the algorithm in action (Pop up will go way when run button clicked or by pressing x)")
   ////////////////////////////////////////////////////////////////////
 
   //add even listener for slider
@@ -154,8 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if(popupContainer.style.display != 'none'){
       popupContainer.style.display = 'none';
     }
-    
-    //TODO: Add message window describing each alogrithm
   });
 
   //Add event listner to generate grid

@@ -27,6 +27,10 @@ export default async function bfs(grid,delayValue){
 
     while(openList.length >0){
         let currentNode = openList.shift();
+
+		let tempNodeType = currentNode.nodeType;
+        currentNode.nodeType = "current";
+        grid.updateCurrentCell(currentNode);
         //console.log("____________________");
 		//console.log(" -Current Node: ",currentNode.id);
 
@@ -91,6 +95,9 @@ export default async function bfs(grid,delayValue){
             
 		}
 
+		//update currentNode type to closed 
+        await delay(150 +delayValue);
+        grid.updateCurrentNodeColor(tempNodeType,currentNode);
 		//call to refresh html
         grid.updatePortionGrid(neighbors_CSS);
         await delay(delayValue);
