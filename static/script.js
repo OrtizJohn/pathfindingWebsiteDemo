@@ -56,7 +56,7 @@ class Controller {
         else if(algo == "A* Algorithm"){
           
           finalPath = await aStar(this.uniqueGrid,delayValue);
-          this.updateGridFinalPath(finalPath,gridHtml);
+          //this.updateGridFinalPath(finalPath,gridHtml);
           //this.uniqueGrid.updateHTMLGrid(gridHtml);
         }
         else if(algo == "BFS"){

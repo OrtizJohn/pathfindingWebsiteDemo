@@ -84,7 +84,7 @@ export default async function dijkstra(grid, delayValue) {
         
         //grid.updateHTMLGrid();
         grid.updatePortionGrid(neighbors_CSS);
-        grid.updateInnerHtmlCell(neighbors_CSS);
+        grid.updateInnerHtmlCell(neighbors_CSS, true);
         await delay(delayValue); // Introduce a delay
        
     }

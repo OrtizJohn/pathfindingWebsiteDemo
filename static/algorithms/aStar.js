@@ -1,6 +1,6 @@
 import node from "/static/node.js";
 import delay from "/static/utils.js";
-
+import PriorityQueue from '/static/priorityQueue.js';
 /* https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2
     A star algorithm 
     write psuedo code for testing here ...
@@ -42,10 +42,15 @@ export default async function aStar(grid,delayValue){
 	let currentNode = null;
 	while (openList.length != 0){
 		//step1 select min fscore 
+		//need to change here so it does not get stuck on same issue
 		let currentResults = minFscore(openList,prevNode);
+		
+
 		prevNode = currentNode;
 		currentNode = currentResults.minNode;
 		let currentIdx = currentResults.minIndex;
+
+		
 
 		let tempNodeType = currentNode.nodeType;
         currentNode.nodeType = "current";
@@ -55,7 +60,8 @@ export default async function aStar(grid,delayValue){
 		console.log(passCt," -Current Node: ",currentNode.id, currentIdx);
 
 		//step2 remove currentnode from open list and add to closed list
-		openList.pop(currentIdx);
+		//openList.pop(currentIdx);
+		openList.splice(currentIdx,1);
 		closedList.push(currentNode);
 
 		//step3 check if currentNode is endNode //FIx here 
@@ -163,7 +169,8 @@ export default async function aStar(grid,delayValue){
 		passCt= passCt +1;
 	}
 
-}
+} 
+
 function hScoreF(tempNode,endNode){
 	let tempNodeCoord = tempNode.getCoord();
 	let endNodeCoord = endNode.getCoord();
@@ -190,7 +197,7 @@ function minFscore(arr,prevNode){
 				}
 			}
 		}
-		console.log("Selected CurrentNode = ",minNode, "--", minIndex);
+		//console.log("Selected CurrentNode = ",minNode, "--", minIndex);
 	}
 	else{
 		if(minNode.id == prevNode.id){

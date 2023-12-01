@@ -27,6 +27,11 @@ class PriorityQueue {
     isEmpty() {
       return this.heap.length === 0;
     }
+    printHeap(){
+      console.log("Heap:");
+      const nodeIDs = this.heap.map(node => node.id);
+      console.log(nodeIDs.join(', '));
+    }
   
     _bubbleUp() {
       let index = this.heap.length - 1;
@@ -36,9 +41,13 @@ class PriorityQueue {
         const parentIndex = Math.floor((index - 1) / 2);
         const parent = this.heap[parentIndex];
   
+        
+        //compare dijkstra's 
         if (node.distFromSrc >= parent.distFromSrc) {
           break;
         }
+        
+        
   
         this.heap[parentIndex] = node;
         this.heap[index] = parent;
@@ -58,7 +67,7 @@ class PriorityQueue {
         let swap = null;
   
         if (leftChildIndex < length) {
-          leftChild = this.heap[leftChildIndex];
+          leftChild = this.heap[leftChildIndex]; 
           if (leftChild.distFromSrc < node.distFromSrc) {
             swap = leftChildIndex;
           }
@@ -75,7 +84,6 @@ class PriorityQueue {
         }
   
         if (swap === null) break;
-  
         this.heap[index] = this.heap[swap];
         this.heap[swap] = node;
         index = swap;

@@ -74,10 +74,16 @@ export default class grid {
             cell.className = 'cell ' +updateNode.nodeType;
         });
     }
-    updateInnerHtmlCell(updateNodes){
+    updateInnerHtmlCell(updateNodes,dj){
         updateNodes.forEach(updateNode => {
             const cell = document.getElementById(updateNode.id);
-            cell.innerText = updateNode.distFromSrc.toFixed(2);
+            if(dj){
+                cell.innerText = updateNode.distFromSrc.toFixed(2);
+            }
+            else{
+                cell.innerText = updateNode.fScore.toFixed(2);
+            }
+            
         })
     }
     updateHTMLGrid(){
@@ -119,10 +125,10 @@ export default class grid {
             currentNode.nodeType = "closed";
             this.updateCurrentCell(currentNode);
         }
-        else{
+        /* else{
             //currentNode.nodeType = tempNodeType;
             this.updateCurrentCell(currentNode);
-        }
+        } */
     }
     updateCurrentNodeColorAstar(tempNodeType,currentNode){
         if (tempNodeType === "start") {
